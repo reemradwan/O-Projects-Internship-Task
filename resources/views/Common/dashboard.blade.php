@@ -5,7 +5,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4 card-title">
             <a href="{{route('newbox')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Create Box</a>
+                    class=" text-white-50"></i> Create Box</a>
         </div>
         @endif
 

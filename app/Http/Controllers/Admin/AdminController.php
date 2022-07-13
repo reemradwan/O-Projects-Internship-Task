@@ -46,8 +46,16 @@ class AdminController extends Controller
 
     }
 
+    public function chooseWinner(){
+
+        $boxItems = $items->inRandomOrder()->limit(3)->get();
+
+        $box->sold_at = now();
+        $box->sold_to = $user_id;
+    }
+
     public function newItem(){
-        return view('Admin.add-item');
+        //TODO
     }
 
 }

@@ -35,8 +35,9 @@ class UserController extends Controller
                 'owner_name'=> $user->firstname + $user->lastname,
             ]);
         $box = Boxes::find($box_id);
-        $box->sold_at = now();
-        $box->sold_to = $user_id;
+
+
+        $user->balance += $box_price;
 
         return response()->json([
             'status' => '200',

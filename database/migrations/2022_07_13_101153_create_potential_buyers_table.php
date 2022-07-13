@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_boxes', function (Blueprint $table) {
-            $table->Id();
-            $table->integer('owner_id');
-            $table->string('owner_name');
-            $table->float('box_price');
+        Schema::create('potential_buyers', function (Blueprint $table) {
+            $table->foreign('box_id');
+            $table->integer('buyers_ids');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_boxes');
+        Schema::dropIfExists('potential_buyers');
     }
 };
