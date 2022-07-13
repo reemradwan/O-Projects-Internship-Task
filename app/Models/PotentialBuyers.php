@@ -10,6 +10,6 @@ use Laravel\Sanctum\HasApiTokens;
 
 class PotentialBuyers extends User
 {
-    
+
 
 }

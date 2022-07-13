@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Boxes;
 use App\Models\Items;
+use App\Models\PotentialBuyers;
 use App\Models\User;
 use App\Models\UserBoxes;
 use Illuminate\Support\Facades\Auth;
@@ -46,12 +47,23 @@ class AdminController extends Controller
 
     }
 
-    public function chooseWinner(){
+    public function chooseWinner($box_id){
+        $potentialBuyers = PotentialBuyers::get('buyers_ids');
+        $buyers = unserialize($potentialBuyers, $potentialBuyers[]);
+        $winner = $buyers->inRandomOrder()->limit(1)->get();
 
-        $boxItems = $items->inRandomOrder()->limit(3)->get();
-
+        $box = Boxes::find($box_id);
         $box->sold_at = now();
-        $box->sold_to = $user_id;
+        $box->sold_to = $winner;
+        $price = $box->price;
+
+        $userBox = UserBoxes::find($box_id);
+        $userBox->owner_id = $winner;
+        $userBox->owner_name = $winner->name;
+        $userBox->price = $price;
+
+        $user = User::find($winner);
+        $user->balace -= $price;
     }
 
     public function newItem(){
